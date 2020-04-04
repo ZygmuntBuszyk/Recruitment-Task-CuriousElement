@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Accordion } from './components/Accordion'
+import 'mapbox-gl/src/css/mapbox-gl.css';
+import { Accordion } from './components/Accordion';
 
 function App() {
   return (

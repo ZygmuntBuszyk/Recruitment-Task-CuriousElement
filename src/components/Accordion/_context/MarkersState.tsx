@@ -1,25 +1,36 @@
 import React, { createContext, useReducer } from 'react';
 import { MarkerReducer } from './MarkerReducer';
 import { mapboxgl } from 'mapbox-gl';
+import { MarkerActions } from '../../../_enum/context/markerActions.enum';
 
-// const marker = new mapboxgl.Marker({
-//     draggable: true
-// })
-// .setLngLat([lng, lat])
-// .addTo(map);
-// const emptyMarker =  new mapboxgl.Marker({})
-const initialState = {
+const initialState:any = {
     markers: []
 }
-console.log(initialState)
 export const MarkerContext = createContext(initialState);
 
 export const ContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(MarkerReducer, initialState);
 
-    return ( <MarkerContext.Provider value={{
-        markers: state.markers
-    }}>
+    const deleteMarker = (marker) => {
+        dispatch({
+            type: MarkerActions.remove,
+            payload: marker
+        })
+    }
+
+    const addMarker = (marker):void => {
+        dispatch({
+            type: MarkerActions.add,
+            payload: marker
+        })
+    }
+    
+    return ( 
+        <MarkerContext.Provider value={{
+            addMarker,
+            markers: state.markers,
+            deleteMarker
+        }}>
             {children}
         </MarkerContext.Provider> )
 }

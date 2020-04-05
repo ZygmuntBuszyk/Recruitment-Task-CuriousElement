@@ -26,23 +26,7 @@ export const StreetMaps = ({map, mapContainer}) => {
             //         zoom: map.getZoom().toFixed(2)
             //     });
             // });
-            if(map) {
-                map.on('click', e => {
-                    console.log('Create a marker');
-                    // const point:IPointer = e.point;
-                    const lng = e.lngLat.lng; 
-                    const lat = e.lngLat.lat;
-                    console.log(e)
-                    const marker = new mapboxgl.Marker({
-                        draggable: true
-                    })
-                    .setLngLat([lng, lat])
-                    .addTo(map);
-    
-                    // setState([...markerState, marker]);
-                      console.log(marker)
-                })
-            }
+           
         })
            
                 // console.log(markerState)

@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './tag.css'
 import { Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
+import { MarkerContext } from '../_context/MarkersState';
 
-export const Tag = ({marker, removeMarker}) => {
+export const Tag = ({ marker, removeMarker, index }) => {
+    marker.index = index;
+    const { updateMarker } = useContext(MarkerContext);
 
+    const onDragEnd = () => {
+        updateMarker(marker)
+    }
+
+    marker.on('dragend', onDragEnd);
+    
     return (
         <div>
             <Breadcrumb>

@@ -7,6 +7,10 @@
     margin: 0;
 }
 
+.mapContainer.mapboxgl-map {
+    overflow: visible;
+}
+
 p {
     background-color: #ffffffdb;
     padding: 10px;
@@ -23,5 +27,8 @@ p {
 .tabpanel {
     height: 100%;
     width: 100%;
+}
+
+.tabpanel.tagList {
     overflow: auto;
 }

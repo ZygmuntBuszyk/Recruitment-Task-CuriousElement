@@ -1,6 +1,5 @@
 import React, { createContext, useReducer } from 'react';
 import { MarkerReducer } from './MarkerReducer';
-import { mapboxgl } from 'mapbox-gl';
 import { MarkerActions } from '../../../_enum/context/markerActions.enum';
 
 const initialState:any = {
@@ -24,13 +23,22 @@ export const ContextProvider = ({children}) => {
             payload: marker
         })
     }
-    
+
+    const updateMarker = (marker):void => {
+        dispatch({
+            type: MarkerActions.update,
+            payload: marker
+        })
+    } 
+
     return ( 
         <MarkerContext.Provider value={{
             addMarker,
             markers: state.markers,
-            deleteMarker
+            deleteMarker,
+            updateMarker
         }}>
             {children}
-        </MarkerContext.Provider> )
+        </MarkerContext.Provider> 
+    )
 }

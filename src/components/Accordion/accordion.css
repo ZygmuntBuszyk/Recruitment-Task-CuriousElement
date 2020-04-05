@@ -17,6 +17,11 @@ p {
     border: 1px solid tomato;
 }
 
+p.active {
+    background: tomato;
+    color: white;
+}
+
 .item {
     text-align: center;
     margin: 10px;

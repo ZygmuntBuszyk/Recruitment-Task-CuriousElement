@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useContext} from 'react'
+import React, {useEffect, useRef, useContext, useState} from 'react'
 import './accordion.css'
 import { UncontrolledCollapse } from "reactstrap";
 import { TagList } from './overlaps/TagList';
@@ -11,8 +11,25 @@ export const Accordion = () => {
     let mapContainer:any = useRef();
     const { markers, deleteMarker, addMarker } = useContext(MarkerContext);
 
-    const toggleTab = e => {
+    const [ state, setState ] = useState({
+        mapActive: true,
+        tagListActive: true
+    });
+
+    const toggleTab = (e, el) => {
         e.preventDefault();
+        if(el === 'StreetMaps') {
+            setState({
+                mapActive: !state.mapActive,
+                tagListActive: state.tagListActive
+            })
+        } 
+        else { 
+            setState({
+                mapActive: state.mapActive,
+                tagListActive: !state.tagListActive
+            })
+        }
     }
 
     const addMarkerToontext = marker => {
@@ -44,8 +61,8 @@ export const Accordion = () => {
     return (
         <div className="mainContent">
             <div className="item">
-                <a href="#" id="streetMapsAccordion" onClick={e => toggleTab(e)}>
-                    <p>StreetMaps</p>
+                <a href="#" id="streetMapsAccordion" onClick={e => toggleTab(e, 'StreetMaps')}>
+                    <p className={state.mapActive ? 'active': ''}>StreetMaps</p>
                 </a>
                 <UncontrolledCollapse
                     className="tabpanel"
@@ -57,8 +74,8 @@ export const Accordion = () => {
                 </UncontrolledCollapse>
             </div>
             <div className="item">
-                <a href="#" id="tagListAccordion" onClick={e => toggleTab(e)}>
-                    <p>TagList</p>
+                <a href="#" id="tagListAccordion" onClick={e => toggleTab(e, 'TagList')}>
+                    <p className={state.tagListActive ? 'active': ''}>TagList</p>
                 </a>
                 <UncontrolledCollapse className="tabpanel tagList" role="tabpanel" toggler="#tagListAccordion" defaultOpen>
                     <TagList markers={markers} removeMarker={removeMarker} />

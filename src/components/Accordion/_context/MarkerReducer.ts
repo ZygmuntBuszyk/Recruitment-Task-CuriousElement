@@ -15,7 +15,7 @@ export const MarkerReducer = (state, action) => {
         case MarkerActions.update:
             return {
                 ...state,
-                markers: state.markers.map(marker => marker) // getUpdatedList(state.markers, action.payload) //  [...state.markers.filter(marker => marker.id == action.payload.id), action.payload, ] 
+                markers: state.markers.map(marker => marker)
             } 
         default:
             return state 
